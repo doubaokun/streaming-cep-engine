@@ -3,74 +3,132 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+
     <title>Streaming-cep-engine by Stratio</title>
   </head>
 
   <body>
-    <div id="container">
-      <div class="inner">
 
-        <header>
-          <h1>Streaming-cep-engine</h1>
-          <h2>Streaming CEP Engine Powered by Spark Streaming &amp; Siddhi</h2>
-        </header>
+    <header>
+      <div class="container">
+        <h1>Streaming-cep-engine</h1>
+        <h2>Streaming CEP Engine Powered by Spark Streaming &amp; Siddhi</h2>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/Stratio/streaming-cep-engine/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/Stratio/streaming-cep-engine/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/Stratio/streaming-cep-engine" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        <section id="downloads">
+          <a href="https://github.com/Stratio/streaming-cep-engine/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/Stratio/streaming-cep-engine/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/Stratio/streaming-cep-engine" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
         </section>
-
-        <hr>
-
-        <section id="main_content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
-
-        <footer>
-          Streaming-cep-engine is maintained by <a href="https://github.com/Stratio">Stratio</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
       </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a name="streaming-cep-engine" class="anchor" href="#streaming-cep-engine"><span class="octicon octicon-link"></span></a>STREAMING-CEP-ENGINE</h1>
+
+<p>Streaming CEP engine is a Complex Event Processing platform built on Spark Streaming.</p>
+
+<p>It is the result of combining the power of Spark Streaming as a continuous computing framework and Siddhi CEP engine as complex event processing engine.</p>
+
+<h2>
+<a name="what-is-complex-event-processing" class="anchor" href="#what-is-complex-event-processing"><span class="octicon octicon-link"></span></a>What is Complex Event Processing?</h2>
+
+<p>Complex event processing, or CEP, is event processing that combines data from multiple sources to infer events or patterns that suggest more complicated circumstances.</p>
+
+<p>CEP as a technique helps discover complex events by analyzing and correlating other events</p>
+
+<h2>
+<a name="streaming-cep-engine-components" class="anchor" href="#streaming-cep-engine-components"><span class="octicon octicon-link"></span></a>Streaming Cep Engine components</h2>
+
+<ul>
+<li><a href="engine/README.md">Engine</a></li>
+<li><a href="api/README.md">Api</a></li>
+<li><a href="shell/README.md">Shell</a></li>
+<li><a href="examples/README.md">Examples</a></li>
+<li><a href="doc/about.md">Documentation</a></li>
+</ul>
+
+<h2>
+<a name="stream-query-language" class="anchor" href="#stream-query-language"><span class="octicon octicon-link"></span></a>Stream Query Language</h2>
+
+<p><strong>1 Stream Definition Language (SDL)</strong></p>
+
+<ul>
+<li>Create, alter or drop a stream, add new queries or remove existing queries</li>
+</ul>
+
+<p><strong>2 Stream Manipulation Language (SML)</strong></p>
+
+<ul>
+<li>Insert events into a stream and list the existing streams in the engine.</li>
+</ul>
+
+<p><strong>3 Stream Action Language (SAL)</strong></p>
+
+<ul>
+<li><p>Listen to a stream (kafka), save the stream to Cassandra or mongoDB (auto-creation of tables), index the stream to ElasticSearch… here you should find useful operations ready to use.</p></li>
+<li><p>Start &amp; Stop each action on-demand</p></li>
+</ul>
+
+<p><strong>4 Built-in functions</strong></p>
+
+<ul>
+<li>Auditing all the requests in the streaming engine (Cassandra or MongoDB)</li>
+<li>Statistics (requests per operation, requests per stream…)</li>
+<li>Failover system (recovering windows, streams and queries from Cassandra or MongoDB)</li>
+</ul>
+
+<h2>
+<a name="streaming-cep-engine-api" class="anchor" href="#streaming-cep-engine-api"><span class="octicon octicon-link"></span></a>Streaming Cep Engine: API</h2>
+
+<ul>
+<li>Java &amp; Scala API</li>
+<li>Simple programming model</li>
+<li>Available as maven dependency</li>
+</ul>
+
+<h2>
+<a name="streaming-cep-engine-shell" class="anchor" href="#streaming-cep-engine-shell"><span class="octicon octicon-link"></span></a>Streaming Cep Engine: SHELL</h2>
+
+<ul>
+<li>Autocomplete &amp; help</li>
+<li>Tab-completion for stream names</li>
+<li>Built on the API</li>
+</ul>
+
+<h2>
+<a name="interesting-facts-about-streaming-cep-engine" class="anchor" href="#interesting-facts-about-streaming-cep-engine"><span class="octicon octicon-link"></span></a>Interesting facts about Streaming Cep Engine</h2>
+
+<ul>
+<li>It was presented in Spark Summit 2014 (<a href="http://spark-summit.org/2014/talk/stratio-streaming-a-new-approach-to-spark-streaming">link</a>)</li>
+<li>Up to 10 million events per minute in a single node.</li>
+<li>It is fully open source. </li>
+</ul>
+
+<h2>
+<a name="streaming-cep-engine-faq" class="anchor" href="#streaming-cep-engine-faq"><span class="octicon octicon-link"></span></a>Streaming CEP engine FAQ</h2>
+
+<p><strong>Is Streaming CEP engine multi-persistence?</strong></p>
+
+<p><em>For sure, we have included ready-to-use actions in the engine that allows you, any time, to start or stop saving all the events in that stream to the persistence of your choice: MongoDB, Cassandra or ElasticSearch.</em></p>
+
+<p><em>The engine takes care about creating keyspaces, tables, collections, indexes or whatever it needs to properly store the events (and,what’s more, if the stream is changed by an alter request, Stratio Streaming will also change the persistence for you).</em></p>
+
+<p><strong>Can I work with temporal windows?</strong></p>
+
+<p><em>Time is a first-class citizen in a CEP engine so yes, you can work with temporal windows. Anyway, length windows and others are also supported, and there are a lot of operators for your queries (avg, count, sum, max, min, patterns, sequences, joins…)</em></p>
+
+<p><strong>How can I send data to the engine?</strong></p>
+
+<p><em>Use the API or the Shell provided by Streaming CEP engine. You can send a really BIG amount of events.</em></p>
+      </section>
     </div>
+
+    
   </body>
 </html>
