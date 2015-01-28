@@ -1,0 +1,965 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Streaming CEP 0.7.0-SNAPSHOT documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.7.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="index.html#document-about" />
+    <link rel="top" title="None" href="index.html#document-index" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html#document-index">Streaming CEP 0.7.0-SNAPSHOT documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="contents">
+<h1>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<span id="document-about"></span><div class="section" id="about-stratio-streaming">
+<h2>About Stratio Streaming<a class="headerlink" href="#about-stratio-streaming" title="Permalink to this headline">¶</a></h2>
+<p>Nowadays data-intensive processes and organizations of all sorts require the use of real-time data
+with increasing flexibility and complexity, so we created Stratio Streaming to meet this demand.
+Stratio Streaming is one of the core modules on which the Stratio platform is based.
+Stratio Streaming is the union of a real-time messaging bus with a complex event processing engine
+using Spark Streaming. Thanks to this technology, Stratio Streaming allows the creation of streams
+and queries on the fly, sending massive data streams, building complex windows over the data or
+manipulating the streams in a simple way by using an SQL-like language.
+Stratio Streaming’s API masks the complexity of the system so that developers can work with live
+streams straightaway. The engine Stratio Streaming also offers built-in solution patterns which
+solve typical use cases and common problems related to streaming. Additionally, we have added global
+features to the engine such as auditing and statistics.</p>
+<div class="section" id="introduction">
+<h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<p>Many big data applications must process batch scenarios combined with
+large streams of live data and provide results in near-real-time, but
+the lack of an hybrid framework (batch/real) forces the companies to
+double the effort to implement new functions.</p>
+<p>Existing traditional streaming systems have a
+event-driven-record-at-a-time processing model, keeping states by
+record. Making stateful streams processing be fault-tolerant is
+challenging.</p>
+<p>With the advent of Apache Spark, all these issues and challenges have
+been resolved and now there is a new and powerful way to design
+distributed, scalable and fault-tolerant systems. For that reason,
+Stratio Streaming Engine is based on Apache Spark Streaming.</p>
+<p>But real-time and big data require a high level of flexibility,
+performance, powerful features and on-demand queries, so we have
+included Complex Event Processing capabilities and real-time operations.</p>
+<p>This way, you can use Stratio Streaming to define or alter your streams
+on the fly, launch a complex query with sliding temporal windows, or
+save your streams to Apache Cassandra… and these are only a few examples
+of the features available.</p>
+</div>
+<div class="section" id="features">
+<h3>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="operations-on-streams">
+<h4>Operations on streams:<a class="headerlink" href="#operations-on-streams" title="Permalink to this headline">¶</a></h4>
+<p>Streams are conceived are event flows. They have a known definition
+including typed fields and they should be use as flowing channels of
+events. In other words, streams have an in-flows and output-flows.</p>
+<p>You can see streams as SQL tables in a relational database, but streams
+are created in an ephemeral environment and no relationship or
+constraint rules are applied on them.</p>
+<p><strong>Stratio Streaming lets you *create, alter or drop streams* on the
+fly.</strong></p>
+</div>
+<div class="section" id="queries-on-streams">
+<h4>Queries on streams:<a class="headerlink" href="#queries-on-streams" title="Permalink to this headline">¶</a></h4>
+<p>You can define queries on streams in real-time, including Complex Event
+Processing operators, such as:</p>
+<ul class="simple">
+<li><strong>Filters</strong>: filtering events by the fields.</li>
+<li><strong>Windows</strong>: restrict the query to time sliding windows or length
+sliding windows.</li>
+<li><strong>Event sequences</strong>: Identifying sequences of events in strict order.</li>
+<li><strong>Event patterns:</strong> Identifying events that match a given pattern,
+not necessarily ordered.</li>
+<li><strong>Stream union</strong>: Joining streams to identify common events in
+isolated streams.</li>
+<li><strong>Projection, group by and built-in functions</strong>: group by, having,
+sum, avg, count operators, among others, are available.</li>
+</ul>
+</div>
+<div class="section" id="actions-on-streams">
+<h4>Actions on streams:<a class="headerlink" href="#actions-on-streams" title="Permalink to this headline">¶</a></h4>
+<p>There are some built-in operations ready to use on streams:</p>
+<ul class="simple">
+<li>Persistence: using Apache Cassandra as long-term storage.</li>
+<li>Statistics: throughput by operation.</li>
+<li>Auditing: using Apache Cassandra as long-term storage.</li>
+</ul>
+</div>
+<div class="section" id="stream-query-language">
+<h4>Stream Query Language<a class="headerlink" href="#stream-query-language" title="Permalink to this headline">¶</a></h4>
+<p>In order to use all these features, Stratio Streaming has a SQL-like
+language called Stream Query Language.</p>
+<p>This way, the previous explained features can be organized in a similar
+way than SQL:</p>
+<ul class="simple">
+<li>Stream Definition Language (SDL):<ul>
+<li>Add and remove queries.</li>
+<li>Create, alter or drop a stream.</li>
+</ul>
+</li>
+<li>Stream Manipulation Language (SML):<ul>
+<li>Insert events into a stream</li>
+<li>List existing streams in the engine.</li>
+</ul>
+</li>
+<li>Stream Action Language (SAL):<ul>
+<li>Manage listeners on stream (start listen, stop listen).</li>
+<li>Stream persistence, i.e. write stream to Cassandra.</li>
+</ul>
+</li>
+<li>Built-in functions:<ul>
+<li>Auditing all the request in the streaming engine.</li>
+<li>Statistics (request per operation, request per stream …).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="architecture">
+<h3>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h3>
+<p>Stratio Streaming is composed of three main elements:</p>
+<ul class="simple">
+<li>A Scala API.</li>
+<li>A publish-subscribe messaging system <a class="reference external" href="http://kafka.apache.org/">Apache Kafka</a>.</li>
+<li>A Streaming and CEP engine <a class="reference external" href="http://spark.apache.org">Apache Spark Streaming</a> and <a class="reference external" href="http://siddhi.sourceforge.net">Siddhi CEP</a>.</li>
+</ul>
+<blockquote>
+<div><img alt="_images/about-overview.jpg" class="align-center" src="_images/about-overview.jpg" style="width: 70%;" />
+</div></blockquote>
+</div>
+<div class="section" id="where-to-go-from-here">
+<h3>Where to go from here<a class="headerlink" href="#where-to-go-from-here" title="Permalink to this headline">¶</a></h3>
+<p>To explore and play with Stratio Streaming, we recommend to visit the
+following:</p>
+<ul class="simple">
+<li><a class="reference internal" href="index.html#basic-application"><em>Writing and Running a Basic Application for Stratio Streaming</em></a>: a step by step tutorial to write an application using Stratio Streaming API.</li>
+<li><a class="reference internal" href="index.html#using-stratio-streaming-api"><em>Using Stratio Streaming API</em></a>: snippets in Java and Scala.</li>
+<li><a class="reference internal" href="index.html#stratio-streaming-sandbox"><em>Stratio Streaming sandbox and demo</em></a></li>
+</ul>
+</div>
+</div>
+<span id="document-using-streaming-api-examples"></span><div class="section" id="using-stratio-streaming-api">
+<span id="id1"></span><h2>Using Stratio Streaming API<a class="headerlink" href="#using-stratio-streaming-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-and-initializing-the-api">
+<h3>Creating and initializing the API<a class="headerlink" href="#creating-and-initializing-the-api" title="Permalink to this headline">¶</a></h3>
+<p>Scala:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">scala</span> <span class="k">val</span> <span class="n">stratioStreamingAPI</span> <span class="k">=</span> <span class="nc">StratioStreamingAPIFactory</span><span class="o">.</span><span class="n">create</span><span class="o">().</span><span class="n">initialize</span>
+</pre></div>
+</div>
+<p>Java:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="nc">IStratioStreamingAPI</span> <span class="n">stratioStreamingAPI</span> <span class="k">=</span> <span class="nc">StratioStreamingAPIFactory</span><span class="o">.</span><span class="n">create</span><span class="o">().</span><span class="n">initialize</span><span class="o">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-and-initializing-the-api-with-server-configuration">
+<h3>Creating and initializing the API with server configuration<a class="headerlink" href="#creating-and-initializing-the-api-with-server-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Scala:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">val</span> <span class="n">stratioStreamingAPI</span> <span class="k">=</span> <span class="nc">StratioStreamingAPIFactory</span><span class="o">.</span><span class="n">create</span><span class="o">()</span>
+     <span class="o">.</span><span class="n">initializeWithServerConfig</span><span class="o">(</span><span class="s">&quot;stratio.node.com&quot;</span><span class="o">,</span> <span class="mi">9092</span><span class="o">,</span> <span class="s">&quot;stratio.node.com&quot;</span><span class="o">,</span> <span class="mi">2181</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>Java:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="nc">IStratioStreamingAPI</span> <span class="n">stratioStreamingAPI</span> <span class="k">=</span> <span class="nc">StratioStreamingAPIFactory</span><span class="o">.</span><span class="n">create</span><span class="o">()</span>
+     <span class="o">.</span><span class="n">initializeWithServerConfig</span><span class="o">(</span><span class="s">&quot;stratio.node.com&quot;</span><span class="o">,</span> <span class="mi">9092</span><span class="o">,</span> <span class="s">&quot;stratio.node.com&quot;</span><span class="o">,</span> <span class="mi">2181</span><span class="o">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-new-stream">
+<h3>Creating a new stream<a class="headerlink" href="#creating-a-new-stream" title="Permalink to this headline">¶</a></h3>
+<p>Scala:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">val</span> <span class="n">firstStreamColumn</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ColumnNameType</span><span class="o">(</span><span class="s">&quot;column1&quot;</span><span class="o">,</span> <span class="nc">ColumnType</span><span class="o">.</span><span class="nc">INTEGER</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">secondStreamColumn</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ColumnNameType</span><span class="o">(</span><span class="s">&quot;column2&quot;</span><span class="o">,</span> <span class="nc">ColumnType</span><span class="o">.</span><span class="nc">STRING</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">streamName</span> <span class="k">=</span> <span class="s">&quot;testStream&quot;</span>
+<span class="k">val</span> <span class="n">columnList</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="n">firstStreamColumn</span><span class="o">,</span> <span class="n">secondStreamColumn</span><span class="o">)</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">createStream</span><span class="o">(</span><span class="n">streamName</span><span class="o">,</span> <span class="n">columnList</span><span class="o">)</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="n">ssEx</span><span class="k">:</span> <span class="kt">StratioStreamingException</span> <span class="o">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">())</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Java:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="nc">ColumnNameType</span> <span class="n">firstStreamColumn</span><span class="k">=</span> <span class="k">new</span> <span class="nc">ColumnNameType</span><span class="o">(</span><span class="s">&quot;column1&quot;</span><span class="o">,</span> <span class="nc">ColumnType</span><span class="o">.</span><span class="nc">INTEGER</span><span class="o">);</span>
+<span class="nc">ColumnNameType</span> <span class="n">secondStreamColumn</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ColumnNameType</span><span class="o">(</span><span class="s">&quot;column2&quot;</span><span class="o">,</span> <span class="nc">ColumnType</span><span class="o">.</span><span class="nc">STRING</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">streamName</span> <span class="k">=</span> <span class="s">&quot;testStream&quot;</span><span class="o">;</span>
+<span class="nc">List</span> <span class="n">columnList</span> <span class="k">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="n">asList</span><span class="o">(</span><span class="n">firstStreamColumn</span><span class="o">,</span> <span class="n">secondStreamColumn</span><span class="o">);</span>
+<span class="k">try</span> <span class="o">{</span>
+      <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">createStream</span><span class="o">(</span><span class="n">streamName</span><span class="o">,</span> <span class="n">columnList</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">StratioStreamingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-columns-to-an-existing-stream">
+<h3>Adding columns to an existing stream<a class="headerlink" href="#adding-columns-to-an-existing-stream" title="Permalink to this headline">¶</a></h3>
+<p>Scala:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">val</span> <span class="n">newStreamColumn</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ColumnNameType</span><span class="o">(</span><span class="s">&quot;column3&quot;</span><span class="o">,</span> <span class="nc">ColumnType</span><span class="o">.</span><span class="nc">DOUBLE</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">streamName</span> <span class="k">=</span> <span class="s">&quot;testStream&quot;</span>
+ <span class="k">val</span> <span class="n">columnList</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="n">newStreamColumn</span><span class="o">)</span>
+ <span class="k">try</span> <span class="o">{</span>
+        <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">alterStream</span><span class="o">(</span><span class="n">streamName</span><span class="o">,</span> <span class="n">columnList</span><span class="o">)</span>
+ <span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
+        <span class="k">case</span> <span class="n">ssEx</span><span class="k">:</span> <span class="kt">StratioStreamingException</span> <span class="o">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">())</span>
+ <span class="o">}</span>
+</pre></div>
+</div>
+<p>Java:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="nc">ColumnNameType</span> <span class="n">thirdStreamColumn</span><span class="k">=</span> <span class="k">new</span> <span class="nc">ColumnNameType</span><span class="o">(</span><span class="s">&quot;column3&quot;</span><span class="o">,</span> <span class="nc">ColumnType</span><span class="o">.</span><span class="nc">DOUBLE</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">streamName</span> <span class="k">=</span> <span class="s">&quot;testStream&quot;</span><span class="o">;</span>
+<span class="nc">List</span> <span class="n">columnList</span> <span class="k">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="n">asList</span><span class="o">(</span><span class="n">thirdStreamColumn</span><span class="o">);</span>
+<span class="k">try</span> <span class="o">{</span>
+     <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">alterStream</span><span class="o">(</span><span class="n">streamName</span><span class="o">,</span> <span class="n">columnList</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">StratioStreamingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+     <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="inserting-data-into-a-stream">
+<h3>Inserting data into a stream<a class="headerlink" href="#inserting-data-into-a-stream" title="Permalink to this headline">¶</a></h3>
+<p>Scala:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">val</span> <span class="n">streamName</span> <span class="k">=</span> <span class="s">&quot;testStream&quot;</span>
+<span class="k">val</span> <span class="n">firstColumnValue</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ColumnNameValue</span><span class="o">(</span><span class="s">&quot;column1&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Integer</span><span class="o">(</span><span class="mi">1</span><span class="o">))</span>
+<span class="k">val</span> <span class="n">secondColumnValue</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ColumnNameValue</span><span class="o">(</span><span class="s">&quot;column2&quot;</span><span class="o">,</span> <span class="s">&quot;testValue&quot;</span><span class="o">)</span>
+<span class="k">val</span> <span class="n">thirdColumnValue</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ColumnNameValue</span><span class="o">(</span><span class="s">&quot;column3&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Double</span><span class="o">(</span><span class="mf">2.0</span><span class="o">))</span>
+<span class="k">val</span> <span class="n">streamData</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span><span class="n">firstColumnValue</span><span class="o">,</span> <span class="n">secondColumnValue</span><span class="o">,</span> <span class="n">thirdColumnValue</span><span class="o">)</span>
+<span class="k">try</span> <span class="o">{</span>
+     <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">insertData</span><span class="o">(</span><span class="n">streamName</span><span class="o">,</span> <span class="n">streamData</span><span class="o">)</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="n">ssEx</span><span class="k">:</span> <span class="kt">StratioStreamingException</span> <span class="o">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">())</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Java:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="nc">String</span> <span class="n">streamName</span> <span class="k">=</span> <span class="s">&quot;testStream&quot;</span><span class="o">;</span>
+<span class="nc">ColumnNameValue</span> <span class="n">firstColumnValue</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ColumnNameValue</span><span class="o">(</span><span class="s">&quot;column1&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Integer</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+<span class="nc">ColumnNameValue</span> <span class="n">secondColumnValue</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ColumnNameValue</span><span class="o">(</span><span class="s">&quot;column2&quot;</span><span class="o">,</span> <span class="s">&quot;testValue&quot;</span><span class="o">);</span>
+<span class="nc">ColumnNameValue</span> <span class="n">thirdColumnValue</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">ColumnNameValue</span><span class="o">(</span><span class="s">&quot;column3&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="nc">Double</span><span class="o">(</span><span class="mf">2.0</span><span class="o">));</span>
+<span class="nc">List</span><span class="o">&lt;</span><span class="nc">ColumnNameValue</span><span class="o">&gt;</span> <span class="n">streamData</span> <span class="k">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="n">asList</span><span class="o">(</span><span class="n">firstColumnValue</span><span class="o">,</span> <span class="n">secondColumnValue</span><span class="o">,</span> <span class="n">thirdColumnValue</span><span class="o">);</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">insertData</span><span class="o">(</span><span class="n">streamName</span><span class="o">,</span> <span class="n">streamData</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">StratioStreamingException</span> <span class="n">ssEx</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-queries-to-streams">
+<h3>Adding queries to streams<a class="headerlink" href="#adding-queries-to-streams" title="Permalink to this headline">¶</a></h3>
+<p>Scala:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">val</span> <span class="n">query</span> <span class="k">=</span> <span class="s">&quot;from testStream select column1, column2, column3 insert into alarms for current-events&quot;</span>
+<span class="k">val</span> <span class="n">streamName</span> <span class="k">=</span> <span class="s">&quot;testStream&quot;</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">queryId</span> <span class="k">=</span> <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">addQuery</span><span class="o">(</span><span class="n">streamName</span><span class="o">,</span> <span class="n">query</span><span class="o">)</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
+   <span class="k">case</span> <span class="n">ssEx</span><span class="k">:</span> <span class="kt">StratioStreamingException</span> <span class="o">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">())</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Java:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="nc">String</span> <span class="n">streamName</span> <span class="k">=</span> <span class="s">&quot;testStream&quot;</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">query</span> <span class="k">=</span> <span class="s">&quot;from testStream select column1, column2, column3 insert into alarms for current-events&quot;</span><span class="o">;</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="n">queryId</span> <span class="k">=</span> <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">addQuery</span><span class="o">(</span><span class="n">streamName</span><span class="o">,</span> <span class="n">query</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">StratioStreamingException</span> <span class="n">ssEx</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="removing-an-existing-stream">
+<h3>Removing an existing stream<a class="headerlink" href="#removing-an-existing-stream" title="Permalink to this headline">¶</a></h3>
+<p>Scala:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">val</span> <span class="n">streamName</span> <span class="k">=</span> <span class="s">&quot;testStream&quot;</span>
+<span class="k">try</span> <span class="o">{</span>
+     <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">dropStream</span><span class="o">(</span><span class="n">streamName</span><span class="o">)</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="n">ssEx</span><span class="k">:</span> <span class="kt">StratioStreamingException</span> <span class="o">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">())</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Java:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="nc">String</span> <span class="n">streamName</span> <span class="k">=</span> <span class="s">&quot;testStream&quot;</span><span class="o">;</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">dropStream</span><span class="o">(</span><span class="n">streamName</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">StratioStreamingException</span> <span class="n">ssEx</span><span class="o">)</span> <span class="o">{</span>
+     <span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="removing-an-existing-query-from-a-stream">
+<h3>Removing an existing query from a stream<a class="headerlink" href="#removing-an-existing-query-from-a-stream" title="Permalink to this headline">¶</a></h3>
+<p>Scala:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">val</span> <span class="n">streamName</span> <span class="k">=</span> <span class="s">&quot;testStream&quot;</span>
+<span class="k">val</span> <span class="n">queryId</span> <span class="k">=</span> <span class="s">&quot;alarms-657c1720-1869-4406-b42a-96b2b8f740b3&quot;</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">removeQuery</span><span class="o">(</span><span class="n">streamName</span><span class="o">,</span> <span class="n">queryId</span><span class="o">)</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
+   <span class="k">case</span> <span class="n">ssEx</span><span class="k">:</span> <span class="kt">StratioStreamingException</span> <span class="o">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">())</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Java:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="nc">String</span> <span class="n">streamName</span> <span class="k">=</span> <span class="s">&quot;testStream&quot;</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">queryId</span> <span class="k">=</span> <span class="s">&quot;alarms-f6bd870f-2cbb-4691-ba2c-ef4392e70a1b&quot;</span><span class="o">;</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">removeQuery</span><span class="o">(</span><span class="n">streamName</span><span class="o">,</span> <span class="n">queryId</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">StratioStreamingException</span> <span class="n">ssEx</span><span class="o">)</span> <span class="o">{</span>
+     <span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="listening-to-streams">
+<h3>Listening to streams<a class="headerlink" href="#listening-to-streams" title="Permalink to this headline">¶</a></h3>
+<p>Scala:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">try</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="n">streams</span> <span class="k">=</span> <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">listenStream</span><span class="o">(</span><span class="s">&quot;testStream&quot;</span><span class="o">)</span>
+  <span class="k">for</span><span class="o">(</span><span class="n">stream</span>  <span class="o">{</span>
+         <span class="n">println</span><span class="o">(</span><span class="s">&quot;Column: &quot;</span><span class="o">+</span><span class="n">column</span><span class="o">.</span><span class="n">getColumn</span><span class="o">)</span>
+         <span class="n">println</span><span class="o">(</span><span class="s">&quot;Value:&quot;</span><span class="o">+</span><span class="n">column</span><span class="o">.</span><span class="n">getValue</span><span class="o">)</span>
+         <span class="n">println</span><span class="o">(</span><span class="s">&quot;Type: &quot;</span><span class="o">+</span><span class="n">column</span><span class="o">.</span><span class="n">getType</span><span class="o">)}</span>
+      <span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
+   <span class="k">case</span> <span class="n">ssEx</span><span class="k">:</span> <span class="kt">StratioStreamingException</span> <span class="o">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">())</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Java:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">try</span> <span class="o">{</span>
+ <span class="nc">KafkaStream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">StratioStreamingMessage</span><span class="o">&gt;</span> <span class="n">streams</span> <span class="k">=</span> <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">listenStream</span><span class="o">(</span><span class="s">&quot;testStream&quot;</span><span class="o">);</span>
+ <span class="k">for</span> <span class="o">(</span><span class="nc">MessageAndMetadata</span> <span class="n">stream</span><span class="k">:</span> <span class="kt">streams</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">StratioStreamingMessage</span> <span class="n">theMessage</span> <span class="k">=</span> <span class="o">(</span><span class="nc">StratioStreamingMessage</span><span class="o">)</span><span class="n">stream</span><span class="o">.</span><span class="n">message</span><span class="o">();</span>
+    <span class="k">for</span> <span class="o">(</span><span class="nc">ColumnNameTypeValue</span> <span class="n">column</span><span class="k">:</span> <span class="kt">theMessage.getColumns</span><span class="o">())</span> <span class="o">{</span>
+       <span class="nc">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="o">(</span><span class="s">&quot;Column: &quot;</span><span class="o">+</span><span class="n">column</span><span class="o">.</span><span class="n">getColumn</span><span class="o">());</span>
+       <span class="nc">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="o">(</span><span class="s">&quot;Value: &quot;</span><span class="o">+</span><span class="n">column</span><span class="o">.</span><span class="n">getValue</span><span class="o">());</span>
+       <span class="nc">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="o">(</span><span class="s">&quot;Type: &quot;</span><span class="o">+</span><span class="n">column</span><span class="o">.</span><span class="n">getType</span><span class="o">());</span>
+    <span class="o">}</span>
+ <span class="o">}</span>
+<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">StratioStreamingException</span> <span class="n">ssEx</span><span class="o">)</span> <span class="o">{</span>
+   <span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stop-listening-to-streams">
+<h3>Stop listening to streams<a class="headerlink" href="#stop-listening-to-streams" title="Permalink to this headline">¶</a></h3>
+<p>Scala:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">try</span> <span class="o">{</span>
+    <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">stopListenStream</span><span class="o">(</span><span class="s">&quot;testStream&quot;</span><span class="o">)</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
+   <span class="k">case</span> <span class="n">ssEx</span><span class="k">:</span> <span class="kt">StratioStreamingException</span> <span class="o">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">())</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Java:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">try</span> <span class="o">{</span>
+   <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">stopListenStream</span><span class="o">(</span><span class="s">&quot;testStream&quot;</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">StratioStreamingException</span> <span class="n">ssEx</span><span class="o">)</span> <span class="o">{</span>
+   <span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="save-the-stream-to-cassandra">
+<h3>Save the stream to Cassandra<a class="headerlink" href="#save-the-stream-to-cassandra" title="Permalink to this headline">¶</a></h3>
+<p>Scala:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">try</span> <span class="o">{</span>
+    <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">saveToCassandra</span><span class="o">(</span><span class="s">&quot;testStream&quot;</span><span class="o">)</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">{</span>
+   <span class="k">case</span> <span class="n">ssEx</span><span class="k">:</span> <span class="kt">StratioStreamingException</span> <span class="o">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">())</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Java:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">try</span> <span class="o">{</span>
+   <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">saveToCassandra</span><span class="o">(</span><span class="s">&quot;testStream&quot;</span><span class="o">);</span>
+<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="nc">StratioStreamingException</span> <span class="n">ssEx</span><span class="o">)</span> <span class="o">{</span>
+   <span class="n">ssEx</span><span class="o">.</span><span class="n">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-the-list-of-all-the-streams-and-their-queries">
+<h3>Getting the list of all the streams and their queries<a class="headerlink" href="#getting-the-list-of-all-the-streams-and-their-queries" title="Permalink to this headline">¶</a></h3>
+<p>Scala:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="k">import</span> <span class="nn">scala.collection.JavaConversions._</span>
+
+<span class="k">val</span> <span class="n">listOfStreams</span> <span class="k">=</span> <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">listStreams</span><span class="o">().</span><span class="n">toList</span>
+<span class="n">println</span><span class="o">(</span><span class="s">&quot;Number of streams: &quot;</span><span class="o">+</span><span class="n">listOfStreams</span><span class="o">.</span><span class="n">size</span><span class="o">)</span>
+<span class="n">listOfStreams</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">stream</span> <span class="k">=&gt;</span> <span class="o">{</span>
+   <span class="n">println</span><span class="o">(</span><span class="s">&quot;--&gt; Stream name: &quot;</span><span class="o">+</span><span class="n">stream</span><span class="o">.</span><span class="n">getStreamName</span><span class="o">)</span>
+   <span class="k">if</span> <span class="o">(</span> <span class="n">stream</span><span class="o">.</span><span class="n">getQueries</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">)</span> <span class="o">{</span>
+     <span class="n">stream</span><span class="o">.</span><span class="n">getQueries</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">query</span> <span class="k">=&gt;</span>
+       <span class="n">println</span><span class="o">(</span><span class="s">&quot;Query: &quot;</span><span class="o">+</span><span class="n">query</span><span class="o">.</span><span class="n">getQuery</span><span class="o">))</span>
+   <span class="o">}</span>
+<span class="o">})</span>
+</pre></div>
+</div>
+<p>Java:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="nc">List</span><span class="o">&lt;</span><span class="nc">StratioStream</span><span class="o">&gt;</span> <span class="n">streamsList</span> <span class="k">=</span> <span class="n">stratioStreamingAPI</span><span class="o">.</span><span class="n">listStreams</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="o">(</span><span class="s">&quot;Number of streams: &quot;</span> <span class="o">+</span> <span class="n">streamsList</span><span class="o">.</span><span class="n">size</span><span class="o">());</span>
+<span class="k">for</span> <span class="o">(</span><span class="nc">StratioStream</span> <span class="n">stream</span><span class="k">:</span> <span class="kt">streamsList</span><span class="o">)</span> <span class="o">{</span>
+   <span class="nc">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="o">(</span><span class="s">&quot;--&gt; Stream Name: &quot;</span><span class="o">+</span><span class="n">stream</span><span class="o">.</span><span class="n">getStreamName</span><span class="o">());</span>
+   <span class="k">if</span> <span class="o">(</span> <span class="n">stream</span><span class="o">.</span><span class="n">getQueries</span><span class="o">().</span><span class="n">size</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">)</span> <span class="o">{</span>
+      <span class="k">for</span> <span class="o">(</span><span class="nc">StreamQuery</span> <span class="n">query</span><span class="k">:</span> <span class="kt">stream.getQueries</span><span class="o">())</span>
+        <span class="nc">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="o">(</span><span class="s">&quot;Query: &quot;</span><span class="o">+</span><span class="n">query</span><span class="o">.</span><span class="n">getQuery</span><span class="o">());</span>
+      <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<span id="document-basic-application"></span><div class="section" id="writing-and-running-a-basic-application-for-stratio-streaming">
+<span id="basic-application"></span><h2>Writing and Running a Basic Application for Stratio Streaming<a class="headerlink" href="#writing-and-running-a-basic-application-for-stratio-streaming" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial you will learn how to write a java or scala project for building Stratio Streaming applications
+and how to run it on a local instance or a standalone cluster. Instructions are based on the Eclipse environment
+but any equivalent can be used.</p>
+<div class="section" id="before-you-start">
+<h3>Before you start<a class="headerlink" href="#before-you-start" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="prerequisites">
+<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference external" href="https://www.eclipse.org/">Eclipse</a> or an equivalent IDE.</li>
+<li><a class="reference external" href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Oracle JDK 7</a>.</li>
+<li><a class="reference external" href="http://maven.apache.org/">Apache Maven</a>: Stratio Streaming API is available in a Maven repository that will be used in this tutorial.</li>
+<li><a class="reference external" href="http://www.scala-lang.org/">Scala</a> &gt;=2.10.3.</li>
+<li>Scala-IDE: follow <a class="reference external" href="http://marketplace.eclipse.org/marketplace-client-intro">instructions at Eclipse marketplace</a> to install it from the marketplace (recommended over downloading the plugin from scala-ide.org).</li>
+<li>m2eclipse-scala plugin: follow <a class="reference external" href="http://scala-ide.org/docs/tutorials/m2eclipse/index.html">instructions at scala-ide.org</a> for installation.</li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h4>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h4>
+<p>Here is a list of the resources that will be used in this tutorial. You
+can download them now or as you go through the instructions. Links will
+be provided later as they will be needed.</p>
+<ul class="simple">
+<li><a class="reference download internal" href="_downloads/StratioStreamingJavaProject.zip"><tt class="xref download docutils literal"><span class="pre">Java</span> <span class="pre">project</span> <span class="pre">example</span></tt></a>.</li>
+<li><a class="reference download internal" href="_downloads/StratioStreamingScalaProject.zip"><tt class="xref download docutils literal"><span class="pre">Scala</span> <span class="pre">project</span> <span class="pre">example</span></tt></a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="creating-the-project">
+<h3>Creating the project<a class="headerlink" href="#creating-the-project" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-1-create-an-empty-project">
+<h4>Step 1: Create an empty project<a class="headerlink" href="#step-1-create-an-empty-project" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Launch Eclipse and in the menu choose File -&gt; New -&gt; Project</li>
+<li>In the “New project” window select “Project” under “General” and
+click “Next”:</li>
+</ul>
+<img alt="_images/basicapp-01-newProject.jpg" class="align-center" src="_images/basicapp-01-newProject.jpg" />
+<ul class="simple">
+<li>In the next window, enter a name for your project and click “Finish”:</li>
+</ul>
+<img alt="_images/basicapp-02-projectName.jpg" class="align-center" src="_images/basicapp-02-projectName.jpg" />
+<p>The newly created project now appears in the package explorer.</p>
+</div>
+<div class="section" id="step-2-import-the-project-skeleton">
+<h4>Step 2: Import the project skeleton<a class="headerlink" href="#step-2-import-the-project-skeleton" title="Permalink to this headline">¶</a></h4>
+<p>Download the project skeleton of your choice and save it in a convenient
+location:</p>
+<ul class="simple">
+<li><a class="reference download internal" href="_downloads/StratioStreamingJavaProject.zip"><tt class="xref download docutils literal"><span class="pre">Java</span> <span class="pre">project</span> <span class="pre">example</span></tt></a>.</li>
+<li><a class="reference download internal" href="_downloads/StratioStreamingScalaProject.zip"><tt class="xref download docutils literal"><span class="pre">Scala</span> <span class="pre">project</span> <span class="pre">example</span></tt></a>.</li>
+</ul>
+<p>In the menu, choose File -&gt; Import. In the “Import” window, select
+“Archive file” in the section “General”, and click “Next”:</p>
+<img alt="_images/basicapp-03-importWindow.jpg" class="align-center" src="_images/basicapp-03-importWindow.jpg" />
+<p>In the next screen:</p>
+<ul class="simple">
+<li>Navigate to the zip file you just downloaded using the “Browse…”
+button.</li>
+<li>Fill in “Into folder” with the name of the project (or use the
+“Browse…” button to select it from a list).</li>
+<li>Check “Overwrite existing resources without warning”,</li>
+<li>and click “Finish”</li>
+</ul>
+<img alt="_images/basicapp-04-importFromFile1.jpg" class="align-center" src="_images/basicapp-04-importFromFile1.jpg" />
+<p>The structure of the project will be displayed in the package explorer.
+Give Maven some time to check and download dependencies. The project
+should finally appear error-free.</p>
+<p>The java project contains an example class (JavaExample.java) and an
+example test (TestJava.java), the scala one an example object
+(ScalaExample.app) and an example test (TestScala.scala), the mixed
+project contains all the formers.</p>
+<p>Navigate through your project to get familiar with it. You can add your
+own code and optionally alter the stream, insert data, add queries and
+listeners.</p>
+</div>
+</div>
+<div class="section" id="running-the-application">
+<h3>Running the application<a class="headerlink" href="#running-the-application" title="Permalink to this headline">¶</a></h3>
+<p>You can run the example provided in the project directly on your IDE. To
+do so, right click on the JavaExample.java file -&gt; Run As -&gt; Java
+Application.</p>
+<p>For the Java or Scala project, the result should be similar to the
+following:</p>
+<div class="highlight-scala"><pre>shell-session Streams in the Stratio Streaming Engine: 3
+    -- Stream Name: stratio_stats_base
+    -- Stream Name: stratio_stats_global_by_operation
+    -- Stream Name: testStream</pre>
+</div>
+<p>Congratulations! You successfully completed this tutorial.</p>
+</div>
+<div class="section" id="where-to-go-from-here">
+<h3>Where to go from here<a class="headerlink" href="#where-to-go-from-here" title="Permalink to this headline">¶</a></h3>
+<p>If you are planning to write your own Stratio Streaming application,
+<a class="reference internal" href="index.html#using-stratio-streaming-api"><em>Using Stratio Streaming API</em></a> may be useful. Those are snippets written in both Java
+and Scala.</p>
+</div>
+</div>
+<span id="document-using-sandbox"></span><div class="section" id="stratio-streaming-sandbox-and-demo">
+<span id="stratio-streaming-sandbox"></span><h2>Stratio Streaming sandbox and demo<a class="headerlink" href="#stratio-streaming-sandbox-and-demo" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="vagrant-setup">
+<h3>Vagrant Setup<a class="headerlink" href="#vagrant-setup" title="Permalink to this headline">¶</a></h3>
+<p>To get an operating virtual machine with stratio streaming distribution
+up and running, we use <a class="reference external" href="https://www.vagrantup.com/">Vagrant</a>.</p>
+<ul class="simple">
+<li>Download and install
+<a class="reference external" href="https://www.vagrantup.com/downloads.html">Vagrant</a>.</li>
+<li>Download and install
+<a class="reference external" href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
+<li>If you are in a windows machine, we will install
+<a class="reference external" href="https://cygwin.com/install.html">Cygwin</a>.</li>
+</ul>
+</div>
+<div class="section" id="running-the-sandbox">
+<h3>Running the sandbox<a class="headerlink" href="#running-the-sandbox" title="Permalink to this headline">¶</a></h3>
+<p>Create any system folder and using the command line, type
+<strong>vagrant init stratio/streaming</strong>.</p>
+<p>To facilitate the reading of the document , we will refer to this
+directory as /install-folder.</p>
+<p>Please, be patient the first time it runs.</p>
+<blockquote>
+<div><img alt="_images/vagrant-shell.jpg" class="align-center" src="_images/vagrant-shell.jpg" />
+</div></blockquote>
+</div>
+<div class="section" id="what-you-will-find-in-the-sandbox">
+<h3>What you will find in the sandbox<a class="headerlink" href="#what-you-will-find-in-the-sandbox" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>OS: CentOS 6.5</li>
+<li>3GB RAM - 2 CPU</li>
+<li>Two ethernet interfaces.</li>
+</ul>
+<p>Name|Version|Service name|Other Stratio
+Streaming|{{site.projects`2].version}}|stratio-streaming|service
+streaming start Stratio Streaming
+Shell|{{site.projects`2].version}}|-|/opt/sds/streaming-shell/bin
+Apache Kafka|0.8.1.1|kafka|service kafka start Apache
+Zookeeper|3.4.6|zookeeper|service zookeeper start Stratio
+Cassandra|2.1.05|cassandra|service cassandra start
+Elasticsearch|1.3.2|elasticsearch|service elasticsearch start
+Kibana|3.1.0|-|<a class="reference external" href="http://10.10.10.10/kibana">http://10.10.10.10/kibana</a>
+Mongodb|2.6.5|mongod|service mongod start Apache Web
+Server|2|httpd|service httpd start</p>
+</div>
+<div class="section" id="access-to-the-sandbox-and-other-useful-commands">
+<h3>Access to the sandbox and other useful commands<a class="headerlink" href="#access-to-the-sandbox-and-other-useful-commands" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="useful-commands">
+<h4>Useful commands<a class="headerlink" href="#useful-commands" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Start the sandbox: <strong>` vagrant up `</strong></li>
+<li>Shut down the sandbox: <strong>` vagrant halt `</strong></li>
+<li>In the sandbox, to exit to the host: <strong>` exit `</strong></li>
+</ul>
+</div>
+<div class="section" id="accessing-the-sandbox">
+<h4>Accessing the sandbox<a class="headerlink" href="#accessing-the-sandbox" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Located in /install-folder</li>
+<li><strong>` vagrant ssh `</strong></li>
+</ul>
+</div>
+</div>
+<div class="section" id="starting-the-stratio-streaming-shell-and-other-useful-commands">
+<h3>Starting the Stratio Streaming Shell and other useful commands<a class="headerlink" href="#starting-the-stratio-streaming-shell-and-other-useful-commands" title="Permalink to this headline">¶</a></h3>
+<p>From the sandbox (vagrant ssh):</p>
+<ul class="simple">
+<li>Starting the Stratio Streaming Shell:
+<strong>/opt/sds/streaming-shell/bin/shell</strong></li>
+<li>List all available commands: <strong>help</strong></li>
+<li>Exit the Stratio Stratio Streaming Shell: <strong>exit</strong></li>
+</ul>
+</div>
+<div class="section" id="f-a-q-about-the-sandbox">
+<h3>F.A.Q about the sandbox<a class="headerlink" href="#f-a-q-about-the-sandbox" title="Permalink to this headline">¶</a></h3>
+<p><strong>I am in the same directory that I copy the Vagrant file but I
+have this error:</strong>:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">A</span> <span class="nc">Vagrant</span> <span class="n">environment</span> <span class="n">or</span> <span class="n">target</span> <span class="n">machine</span> <span class="n">is</span> <span class="n">required</span> <span class="n">to</span> <span class="n">run</span> <span class="k">this</span>
+<span class="n">command</span><span class="o">.</span> <span class="nc">Run</span> <span class="n">vagrant</span> <span class="n">init</span> <span class="n">to</span> <span class="n">create</span> <span class="n">a</span> <span class="k">new</span> <span class="nc">Vagrant</span> <span class="n">environment</span><span class="o">.</span> <span class="nc">Or</span><span class="o">,</span>
+<span class="n">get</span> <span class="n">an</span> <span class="nc">ID</span> <span class="n">of</span> <span class="n">a</span> <span class="n">target</span> <span class="n">machine</span> <span class="n">from</span> <span class="n">vagrant</span> <span class="n">global</span><span class="o">-</span><span class="n">status</span> <span class="n">to</span> <span class="n">run</span>
+<span class="k">this</span> <span class="n">command</span> <span class="n">on</span><span class="o">.</span> <span class="n">A</span> <span class="k">final</span> <span class="n">option</span> <span class="n">is</span> <span class="n">to</span> <span class="n">change</span> <span class="n">to</span> <span class="n">a</span> <span class="n">directory</span> <span class="k">with</span> <span class="n">a</span>
+<span class="nc">Vagrantfile</span> <span class="n">and</span> <span class="n">to</span> <span class="k">try</span> <span class="n">again</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Make sure your file name is Vagrantfile instead of Vagrantfile.txt or
+VagrantFile.</p>
+<p><strong>When I execute vagrant ssh I have this error:</strong>:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">ssh</span> <span class="n">executable</span> <span class="n">not</span> <span class="n">found</span> <span class="n">in</span> <span class="n">any</span> <span class="n">directories</span> <span class="n">in</span> <span class="n">the</span> <span class="o">%</span><span class="nc">PATH</span><span class="o">%</span> <span class="n">variable</span><span class="o">.</span> <span class="nc">Is</span> <span class="n">an</span>
+<span class="nc">SSH</span> <span class="n">client</span> <span class="n">installed</span><span class="o">?</span> <span class="nc">Try</span> <span class="n">installing</span> <span class="nc">Cygwin</span><span class="o">,</span> <span class="nc">MinGW</span> <span class="n">or</span> <span class="nc">Git</span><span class="o">,</span> <span class="n">all</span> <span class="n">of</span> <span class="n">which</span>
+<span class="n">contain</span> <span class="n">an</span> <span class="nc">SSH</span> <span class="n">client</span><span class="o">.</span> <span class="nc">Or</span> <span class="n">use</span> <span class="n">your</span> <span class="n">favorite</span> <span class="nc">SSH</span> <span class="n">client</span> <span class="k">with</span> <span class="n">the</span> <span class="n">following</span>
+<span class="n">authentication</span> <span class="n">information</span> <span class="n">shown</span> <span class="n">below</span><span class="k">:</span>
+</pre></div>
+</div>
+<p>We need to install <a class="reference external" href="https://cygwin.com/install.html">Cygwin</a> or <a class="reference external" href="http://git-scm.com/download/win">Git for
+Windows</a>.</p>
+</div>
+<div class="section" id="stratio-streaming-demos">
+<h3>Stratio Streaming Demos<a class="headerlink" href="#stratio-streaming-demos" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="demo-1-sensor-monitoring">
+<h4>Demo #1: Sensor Monitoring<a class="headerlink" href="#demo-1-sensor-monitoring" title="Permalink to this headline">¶</a></h4>
+<p>This demo will show up some of the features of Stratio Streaming, an
+interactive CEP engine built with Apache Spark and Apache Siddhi, such
+as:</p>
+<ul class="simple">
+<li>Use time-based and event-length sliding windows (with aggregation
+functions)</li>
+<li>Launch some queries in order to control thresholds and insert events
+in other streams</li>
+<li>The use of derived streams (streams whose definition is inferred by
+the engine, because it is implicit in the queries)</li>
+<li>Start actions on streams</li>
+</ul>
+<p>This CEP use case is oriented to track measures in a sensor monitoring
+environment, but Complex Event Processing could be succesfully applied
+to other scenarios and use cases, such as fraud detection, real-time
+applications and systems monitoring, stock-quote analysis or
+ciber-security, among others.</p>
+<p>In this demo, you will use the following components and features:</p>
+<ul class="simple">
+<li>The Stratio Streaming Engine, taking care of all the real-time
+processing and all the CEP operations.</li>
+<li>The Stratio Streaming Shell, in order to interact with the engine in
+real-time.</li>
+<li>The Stratio Streaming API, in order to send simulated sensor measures
+to the engine.</li>
+<li>The INDEX action over several streams, in order to send all the
+events in a stream to a data storage, in this case Elastic Search.</li>
+<li>Kibana web application as a real-time monitor of the entire system.</li>
+</ul>
+<p>To put all these pieces to work, you need to:</p>
+<ul class="simple">
+<li>Write some commands in the Stratio Streaming Shell to create all the
+streams, queries and actions.</li>
+<li>Simulate some random sensor measures related to basic signals of a
+system (cpu, memory, processes…)</li>
+<li>And lastly, visualize all the indexed data in real-time.</li>
+</ul>
+</div>
+<div class="section" id="shell-steps">
+<h4>Shell steps<a class="headerlink" href="#shell-steps" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>vagrant ssh</li>
+<li>/opt/sds/streaming-shell/bin/shell</li>
+<li>Creation of a base stream, where we are going to insert all the sensor</li>
+</ul>
+<p>measures. A stream definition is similar to a table, with field
+definition and types:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">create</span> <span class="o">--</span><span class="n">stream</span> <span class="n">sensor_grid</span> <span class="o">--</span><span class="n">definition</span> <span class="s">&quot;name.string,data.double&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong>List</strong> command allow us to check out the current state of the CEP</li>
+</ul>
+<p>engine. How many streams and queries are already created?, Which actions
+are enabled on a stream?, What is the definition of a stream?:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">list</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>By launching this query we are aggregating the sensor measures in windows based on event length (250 events), so that</li>
+</ul>
+<p>we can get an average measure by each sensor type. This is a continuous query, it will be registered from now in the engine, unlike the classic
+request/response model of the relational databases. In addition, the result of the query will be inserted in another stream, whose definition
+is inferred from the query’s projection. That means that you don’t have to explicitly create the output stream. The engine will infer the
+definition of the stream and create it automatically.:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">add</span> <span class="n">query</span> <span class="o">--</span><span class="n">stream</span> <span class="n">sensor_grid</span> <span class="o">--</span><span class="n">definition</span> <span class="s">&quot;from sensor_grid#window.length(250) select name, avg(data) as data group by name insert into sensor_grid_avg  for current-events&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>We request the engine to start one of the available actions on the</li>
+</ul>
+<p>base stream that we have previously created. In particular the one that
+send all the events in this stream to Elastic Search. Actions can be
+enabled and disabled in any moment, and there are actions ready to use
+such us saving the events into Cassandra, MongoDB or ElasticSearch. In
+addition, there is an special action called LISTEN that send events to
+an specific topic on Kafka whose name is the same as the stream in which
+the action has been enabled.:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">index</span> <span class="n">start</span> <span class="o">--</span><span class="n">stream</span> <span class="n">sensor_grid_avg</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Now, by doing a “list”, we can check out that there are two streams, one query and the</li>
+</ul>
+<p>stream called “sensor_grid” has an action enabled, INDEX.:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">list</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>Now, working on the aggregated measures, we will launch two queries that use operators to filter and set thresholds on</li>
+</ul>
+<p>events. Furthermore, we will use time-based windows to fire alarms if these thresholds are reached only in an specific period of time. The
+output of these queries is sent to the same new stream, again infered by the engine.</p>
+<ul>
+<li><p class="first">Query #1:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">add</span> <span class="n">query</span> <span class="o">--</span><span class="n">stream</span> <span class="n">sensor_grid_avg</span> <span class="o">--</span><span class="n">definition</span> <span class="s">&quot;from sensor_grid_avg`name==&#39;cpu&#39; and data &gt; 80]#window.timeBatch(10 seconds)  select name, avg(data) as data, &#39;Alarm_intensive_CPU_load&#39; as text insert into sensor_grid_alarms  for current-events&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Query #2:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">add</span> <span class="n">query</span> <span class="o">--</span><span class="n">stream</span> <span class="n">sensor_grid_avg</span> <span class="o">--</span><span class="n">definition</span> <span class="s">&quot;from sensor_grid_avg`name==&#39;memory&#39; and data &gt; 75]#window.timeBatch(5 seconds)  select name, avg(data) as data, &#39;Alarm_intensive_MEMORY_load&#39; as text insert into sensor_grid_alarms  for current-events&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Query #3:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">add</span> <span class="n">query</span> <span class="o">--</span><span class="n">stream</span> <span class="n">sensor_grid_avg</span> <span class="o">--</span><span class="n">definition</span> <span class="s">&quot;from sensor_grid_avg`(name==&#39;memory&#39; and data &gt; 80) or (name==&#39;cpu&#39; and data &gt; 90)]#window.timeBatch(15 seconds) select name , avg(data) as data, &#39;Alarm_inminent_shutdown&#39; as text insert into sensor_grid_alarms for current-events&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Let’s start indexing the alarms, too:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">index</span> <span class="n">start</span> <span class="o">--</span><span class="n">stream</span> <span class="n">sensor_grid_alarms</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you want, you can start inserting one event by using the shell:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">insert</span> <span class="o">--</span><span class="n">stream</span> <span class="n">sensor_grid</span> <span class="o">--</span><span class="n">values</span> <span class="s">&quot;name.cpu,data.33&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">We are done with the shell.:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">exit</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="sensor-grid-simulation-steps">
+<h4>Sensor grid simulation steps<a class="headerlink" href="#sensor-grid-simulation-steps" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Now, let’s send some bulk data to the engine. All the measures are</li>
+</ul>
+<p>fake but we are producing random variations on them, in order to
+simulate the behaviour of a real system:</p>
+<div class="highlight-scala"><pre>sudo sh  /opt/sds/streaming-examples/bin/hardware-emulator 2 streaming.stratio.com:9092</pre>
+</div>
+<ul class="simple">
+<li>You can launch this tool as many times as you want.</li>
+</ul>
+</div>
+<div class="section" id="dashboard-steps">
+<h4>Dashboard steps<a class="headerlink" href="#dashboard-steps" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li>Open a browser on your machine and go here: <a class="reference external" href="http://[SANDBOX_IP]/kibana/index.html#/dashboard/file/sensor-grid-monitoring.json">http://[SANDBOX_IP]/kibana/index.html#/dashboard/file/sensor-grid-monitoring.json</a></li>
+<li>Thanks to this real-time dashboard, you can watch all the things
+happening inside the engine. All the aggregated events, alarms in
+some fancy widgets.</li>
+</ul>
+<blockquote>
+<div><img alt="_images/kibana-sensor-grid-dashboard.jpg" class="align-center" src="_images/kibana-sensor-grid-dashboard.jpg" />
+</div></blockquote>
+</div>
+<div class="section" id="extra-streaming-metrics">
+<h4>Extra: Streaming metrics<a class="headerlink" href="#extra-streaming-metrics" title="Permalink to this headline">¶</a></h4>
+<p>Stratio Streaming is the result of combining the power of Spark
+Streaming as a continuous computing framework and Siddhi CEP engine as
+complex event processing engine. This dashboard is showing some
+statistics related to the status of the Stratio Streaming engine,
+allowing you to inspect commands, events and throughput, in a real-time
+panel. This way, we took advantage of the engine itself to take care of
+all the internal events produced by the engine. In order to get this
+dashboard working, please execute the following commands:</p>
+<ul class="simple">
+<li>To start we need change some properties into streaming engine</li>
+</ul>
+<p>configuration.:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sds</span><span class="o">/</span><span class="n">streaming</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">Set <strong>statsEnabled</strong> property to true.</p>
+</li>
+<li><p class="first">Now, is necessary to restart streaming service.:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">sudo</span> <span class="n">service</span> <span class="n">streaming</span> <span class="n">restart</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Using the shell, execute this commands:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">sds</span><span class="o">/</span><span class="n">streaming</span><span class="o">-</span><span class="n">shell</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">shell</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">You can execute into shell the list command and you should obtain this result:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">stratio</span><span class="o">-</span><span class="n">streaming</span><span class="o">&gt;</span> <span class="n">list</span>
+<span class="nc">Stream</span> <span class="n">name</span>                  <span class="nc">User</span> <span class="n">defined</span>  <span class="nc">Queries</span>  <span class="nc">Elements</span>  <span class="nc">Active</span> <span class="n">actions</span>
+<span class="o">---------------------------</span>  <span class="o">------------</span>  <span class="o">-------</span>  <span class="o">--------</span>  <span class="o">--------------</span>
+<span class="n">streaming</span><span class="o">-</span><span class="n">gauge</span><span class="o">-</span><span class="n">metrics</span>      <span class="kc">false</span>         <span class="mi">0</span>        <span class="mi">3</span>         <span class="o">[]</span>
+<span class="n">streaming</span><span class="o">-</span><span class="n">counter</span><span class="o">-</span><span class="n">metrics</span>    <span class="kc">false</span>         <span class="mi">0</span>        <span class="mi">3</span>         <span class="o">[]</span>
+<span class="n">streaming</span><span class="o">-</span><span class="n">histogram</span><span class="o">-</span><span class="n">metrics</span>  <span class="kc">false</span>         <span class="mi">0</span>        <span class="mi">13</span>        <span class="o">[]</span>
+<span class="n">streaming</span><span class="o">-</span><span class="n">meter</span><span class="o">-</span><span class="n">metrics</span>      <span class="kc">false</span>         <span class="mi">0</span>        <span class="mi">8</span>         <span class="o">[]</span>
+<span class="n">streaming</span><span class="o">-</span><span class="n">timer</span><span class="o">-</span><span class="n">metrics</span>      <span class="kc">false</span>         <span class="mi">0</span>        <span class="mi">19</span>        <span class="o">[]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Execute this commands to index all metric streams:</p>
+<div class="highlight-scala"><div class="highlight"><pre><span class="n">index</span> <span class="n">start</span> <span class="o">--</span><span class="n">stream</span> <span class="n">streaming</span><span class="o">-</span><span class="n">gauge</span><span class="o">-</span><span class="n">metrics</span>
+<span class="n">index</span> <span class="n">start</span> <span class="o">--</span><span class="n">stream</span> <span class="n">streaming</span><span class="o">-</span><span class="n">meter</span><span class="o">-</span><span class="n">metrics</span>
+<span class="n">index</span> <span class="n">start</span> <span class="o">--</span><span class="n">stream</span> <span class="n">streaming</span><span class="o">-</span><span class="n">counter</span><span class="o">-</span><span class="n">metrics</span>
+<span class="n">index</span> <span class="n">start</span> <span class="o">--</span><span class="n">stream</span> <span class="n">streaming</span><span class="o">-</span><span class="n">histogram</span><span class="o">-</span><span class="n">metrics</span>
+<span class="n">index</span> <span class="n">start</span> <span class="o">--</span><span class="n">stream</span> <span class="n">streaming</span><span class="o">-</span><span class="n">timer</span><span class="o">-</span><span class="n">metrics</span>
+</pre></div>
+</div>
+</li>
+<li><dl class="first docutils">
+<dt>Now, you can access to metrics kibana dashboard:</dt>
+<dd><p class="first last"><a class="reference external" href="http://[SANDBOX_IP]/kibana/index.html#/dashboard/file/streaming-status.json">http://[SANDBOX_IP]/kibana/index.html#/dashboard/file/streaming-status.json</a></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html#document-index">Table Of Contents</a></h3>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-about">1. About Stratio Streaming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#introduction">1.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#features">1.2. Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#operations-on-streams">1.2.1. Operations on streams:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#queries-on-streams">1.2.2. Queries on streams:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#actions-on-streams">1.2.3. Actions on streams:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#stream-query-language">1.2.4. Stream Query Language</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#architecture">1.3. Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#where-to-go-from-here">1.4. Where to go from here</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-using-streaming-api-examples">2. Using Stratio Streaming API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#creating-and-initializing-the-api">2.1. Creating and initializing the API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#creating-and-initializing-the-api-with-server-configuration">2.2. Creating and initializing the API with server configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#creating-a-new-stream">2.3. Creating a new stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#adding-columns-to-an-existing-stream">2.4. Adding columns to an existing stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#inserting-data-into-a-stream">2.5. Inserting data into a stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#adding-queries-to-streams">2.6. Adding queries to streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#removing-an-existing-stream">2.7. Removing an existing stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#removing-an-existing-query-from-a-stream">2.8. Removing an existing query from a stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#listening-to-streams">2.9. Listening to streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#stop-listening-to-streams">2.10. Stop listening to streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#save-the-stream-to-cassandra">2.11. Save the stream to Cassandra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#getting-the-list-of-all-the-streams-and-their-queries">2.12. Getting the list of all the streams and their queries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-basic-application">3. Writing and Running a Basic Application for Stratio Streaming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#before-you-start">3.1. Before you start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#prerequisites">3.1.1. Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#resources">3.1.2. Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#creating-the-project">3.2. Creating the project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#step-1-create-an-empty-project">3.2.1. Step 1: Create an empty project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#step-2-import-the-project-skeleton">3.2.2. Step 2: Import the project skeleton</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#running-the-application">3.3. Running the application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#where-to-go-from-here">3.4. Where to go from here</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-using-sandbox">4. Stratio Streaming sandbox and demo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#vagrant-setup">4.1. Vagrant Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#running-the-sandbox">4.2. Running the sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#what-you-will-find-in-the-sandbox">4.3. What you will find in the sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#access-to-the-sandbox-and-other-useful-commands">4.4. Access to the sandbox and other useful commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#useful-commands">4.4.1. Useful commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#accessing-the-sandbox">4.4.2. Accessing the sandbox</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#starting-the-stratio-streaming-shell-and-other-useful-commands">4.5. Starting the Stratio Streaming Shell and other useful commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#f-a-q-about-the-sandbox">4.6. F.A.Q about the sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#stratio-streaming-demos">4.7. Stratio Streaming Demos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="index.html#demo-1-sensor-monitoring">4.7.1. Demo #1: Sensor Monitoring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#shell-steps">4.7.2. Shell steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#sensor-grid-simulation-steps">4.7.3. Sensor grid simulation steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#dashboard-steps">4.7.4. Dashboard steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#extra-streaming-metrics">4.7.5. Extra: Streaming metrics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html#document-index">Streaming CEP 0.7.0-SNAPSHOT documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015 Stratio.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
