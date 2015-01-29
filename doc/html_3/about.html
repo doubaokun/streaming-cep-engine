@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1. About Stratio Streaming &mdash; Streaming CEP 0.7.0-SNAPSHOT documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.2.0/cosmo/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.7.0-SNAPSHOT',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="About these documents" href="#" />
+    <link rel="top" title="Streaming CEP 0.7.0-SNAPSHOT documentation" href="index.html" />
+    <link rel="next" title="2. Using Stratio Streaming API" href="using-streaming-api-examples.html" />
+    <link rel="prev" title="Contents:" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body>
+
+  <div id="navbar" class="navbar navbar-default ">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Streaming CEP</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.7.0-SNAPSHOT</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">1. About Stratio Streaming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">1.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">1.2. Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#architecture">1.3. Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#where-to-go-from-here">1.4. Where to go from here</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="using-streaming-api-examples.html">2. Using Stratio Streaming API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="using-streaming-api-examples.html#creating-and-initializing-the-api">2.1. Creating and initializing the API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-streaming-api-examples.html#creating-and-initializing-the-api-with-server-configuration">2.2. Creating and initializing the API with server configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-streaming-api-examples.html#creating-a-new-stream">2.3. Creating a new stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-streaming-api-examples.html#adding-columns-to-an-existing-stream">2.4. Adding columns to an existing stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-streaming-api-examples.html#inserting-data-into-a-stream">2.5. Inserting data into a stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-streaming-api-examples.html#adding-queries-to-streams">2.6. Adding queries to streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-streaming-api-examples.html#removing-an-existing-stream">2.7. Removing an existing stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-streaming-api-examples.html#removing-an-existing-query-from-a-stream">2.8. Removing an existing query from a stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-streaming-api-examples.html#listening-to-streams">2.9. Listening to streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-streaming-api-examples.html#stop-listening-to-streams">2.10. Stop listening to streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-streaming-api-examples.html#save-the-stream-to-cassandra">2.11. Save the stream to Cassandra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-streaming-api-examples.html#getting-the-list-of-all-the-streams-and-their-queries">2.12. Getting the list of all the streams and their queries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basic-application.html">3. Writing and Running a Basic Application for Stratio Streaming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic-application.html#before-you-start">3.1. Before you start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-application.html#creating-the-project">3.2. Creating the project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-application.html#running-the-application">3.3. Running the application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic-application.html#where-to-go-from-here">3.4. Where to go from here</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="using-sandbox.html">4. Stratio Streaming sandbox and demo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="using-sandbox.html#vagrant-setup">4.1. Vagrant Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-sandbox.html#running-the-sandbox">4.2. Running the sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-sandbox.html#what-you-will-find-in-the-sandbox">4.3. What you will find in the sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-sandbox.html#access-to-the-sandbox-and-other-useful-commands">4.4. Access to the sandbox and other useful commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-sandbox.html#starting-the-stratio-streaming-shell-and-other-useful-commands">4.5. Starting the Stratio Streaming Shell and other useful commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-sandbox.html#f-a-q-about-the-sandbox">4.6. F.A.Q about the sandbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using-sandbox.html#stratio-streaming-demos">4.7. Stratio Streaming Demos</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="index.html" title="Previous Chapter: Contents:"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Contents:</span>
+    </a>
+  </li>
+  <li>
+    <a href="using-streaming-api-examples.html" title="Next Chapter: 2. Using Stratio Streaming API"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">2. Using Stratio... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+  <div class="section" id="about-stratio-streaming">
+<h1>1. About Stratio Streaming<a class="headerlink" href="#about-stratio-streaming" title="Permalink to this headline">¶</a></h1>
+<p>Nowadays data-intensive processes and organizations of all sorts require the use of real-time data
+with increasing flexibility and complexity, so we created Stratio Streaming to meet this demand.
+Stratio Streaming is one of the core modules on which the Stratio platform is based.
+Stratio Streaming is the union of a real-time messaging bus with a complex event processing engine
+using Spark Streaming. Thanks to this technology, Stratio Streaming allows the creation of streams
+and queries on the fly, sending massive data streams, building complex windows over the data or
+manipulating the streams in a simple way by using an SQL-like language.
+Stratio Streaming’s API masks the complexity of the system so that developers can work with live
+streams straightaway. The engine Stratio Streaming also offers built-in solution patterns which
+solve typical use cases and common problems related to streaming. Additionally, we have added global
+features to the engine such as auditing and statistics.</p>
+<div class="section" id="introduction">
+<h2>1.1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Many big data applications must process batch scenarios combined with
+large streams of live data and provide results in near-real-time, but
+the lack of an hybrid framework (batch/real) forces the companies to
+double the effort to implement new functions.</p>
+<p>Existing traditional streaming systems have a
+event-driven-record-at-a-time processing model, keeping states by
+record. Making stateful streams processing be fault-tolerant is
+challenging.</p>
+<p>With the advent of Apache Spark, all these issues and challenges have
+been resolved and now there is a new and powerful way to design
+distributed, scalable and fault-tolerant systems. For that reason,
+Stratio Streaming Engine is based on Apache Spark Streaming.</p>
+<p>But real-time and big data require a high level of flexibility,
+performance, powerful features and on-demand queries, so we have
+included Complex Event Processing capabilities and real-time operations.</p>
+<p>This way, you can use Stratio Streaming to define or alter your streams
+on the fly, launch a complex query with sliding temporal windows, or
+save your streams to Apache Cassandra… and these are only a few examples
+of the features available.</p>
+</div>
+<div class="section" id="features">
+<h2>1.2. Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="operations-on-streams">
+<h3>1.2.1. Operations on streams:<a class="headerlink" href="#operations-on-streams" title="Permalink to this headline">¶</a></h3>
+<p>Streams are conceived are event flows. They have a known definition
+including typed fields and they should be use as flowing channels of
+events. In other words, streams have an in-flows and output-flows.</p>
+<p>You can see streams as SQL tables in a relational database, but streams
+are created in an ephemeral environment and no relationship or
+constraint rules are applied on them.</p>
+<p><strong>Stratio Streaming lets you *create, alter or drop streams* on the
+fly.</strong></p>
+</div>
+<div class="section" id="queries-on-streams">
+<h3>1.2.2. Queries on streams:<a class="headerlink" href="#queries-on-streams" title="Permalink to this headline">¶</a></h3>
+<p>You can define queries on streams in real-time, including Complex Event
+Processing operators, such as:</p>
+<ul class="simple">
+<li><strong>Filters</strong>: filtering events by the fields.</li>
+<li><strong>Windows</strong>: restrict the query to time sliding windows or length
+sliding windows.</li>
+<li><strong>Event sequences</strong>: Identifying sequences of events in strict order.</li>
+<li><strong>Event patterns:</strong> Identifying events that match a given pattern,
+not necessarily ordered.</li>
+<li><strong>Stream union</strong>: Joining streams to identify common events in
+isolated streams.</li>
+<li><strong>Projection, group by and built-in functions</strong>: group by, having,
+sum, avg, count operators, among others, are available.</li>
+</ul>
+</div>
+<div class="section" id="actions-on-streams">
+<h3>1.2.3. Actions on streams:<a class="headerlink" href="#actions-on-streams" title="Permalink to this headline">¶</a></h3>
+<p>There are some built-in operations ready to use on streams:</p>
+<ul class="simple">
+<li>Persistence: using Apache Cassandra as long-term storage.</li>
+<li>Statistics: throughput by operation.</li>
+<li>Auditing: using Apache Cassandra as long-term storage.</li>
+</ul>
+</div>
+<div class="section" id="stream-query-language">
+<h3>1.2.4. Stream Query Language<a class="headerlink" href="#stream-query-language" title="Permalink to this headline">¶</a></h3>
+<p>In order to use all these features, Stratio Streaming has a SQL-like
+language called Stream Query Language.</p>
+<p>This way, the previous explained features can be organized in a similar
+way than SQL:</p>
+<ul class="simple">
+<li>Stream Definition Language (SDL):<ul>
+<li>Add and remove queries.</li>
+<li>Create, alter or drop a stream.</li>
+</ul>
+</li>
+<li>Stream Manipulation Language (SML):<ul>
+<li>Insert events into a stream</li>
+<li>List existing streams in the engine.</li>
+</ul>
+</li>
+<li>Stream Action Language (SAL):<ul>
+<li>Manage listeners on stream (start listen, stop listen).</li>
+<li>Stream persistence, i.e. write stream to Cassandra.</li>
+</ul>
+</li>
+<li>Built-in functions:<ul>
+<li>Auditing all the request in the streaming engine.</li>
+<li>Statistics (request per operation, request per stream …).</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="architecture">
+<h2>1.3. Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p>Stratio Streaming is composed of three main elements:</p>
+<ul class="simple">
+<li>A Scala API.</li>
+<li>A publish-subscribe messaging system <a class="reference external" href="http://kafka.apache.org/">Apache Kafka</a>.</li>
+<li>A Streaming and CEP engine <a class="reference external" href="http://spark.apache.org">Apache Spark Streaming</a> and <a class="reference external" href="http://siddhi.sourceforge.net">Siddhi CEP</a>.</li>
+</ul>
+<blockquote>
+<div><img alt="_images/about-overview.jpg" class="align-center" src="_images/about-overview.jpg" style="width: 70%;" />
+</div></blockquote>
+</div>
+<div class="section" id="where-to-go-from-here">
+<h2>1.4. Where to go from here<a class="headerlink" href="#where-to-go-from-here" title="Permalink to this headline">¶</a></h2>
+<p>To explore and play with Stratio Streaming, we recommend to visit the
+following:</p>
+<ul class="simple">
+<li><a class="reference internal" href="basic-application.html#basic-application"><em>Writing and Running a Basic Application for Stratio Streaming</em></a>: a step by step tutorial to write an application using Stratio Streaming API.</li>
+<li><a class="reference internal" href="using-streaming-api-examples.html#using-stratio-streaming-api"><em>Using Stratio Streaming API</em></a>: snippets in Java and Scala.</li>
+<li><a class="reference internal" href="using-sandbox.html#stratio-streaming-sandbox"><em>Stratio Streaming sandbox and demo</em></a></li>
+</ul>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2015 Stratio.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.1.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
